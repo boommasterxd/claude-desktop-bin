@@ -292,6 +292,20 @@ The main Chat tab running natively on Linux.
 
 ![Claude Chat](docs/chat/cc.png)
 
+## Reading PDFs and Documents
+
+Claude Desktop can read PDFs and other documents on Linux through three mechanisms:
+
+| Method | How to use | Tool / mechanism |
+|--------|-----------|-----------------|
+| **File upload (Chat)** | Drag-and-drop a PDF onto the chat input, or click the paperclip icon and browse | Anthropic API document parsing — built into Claude's model, no extra package needed |
+| **Cowork `/pdf` skill** | Type `/pdf` in a Cowork session, then provide the file path or paste text | `mcp__cowork__` tools via [claude-cowork-service](https://github.com/patrickjaja/claude-cowork-service) |
+| **Computer Use (screenshot)** | Ask Claude to open and screenshot a PDF viewer | `screenshot` tool from the built-in Computer Use MCP server — see [Computer Use](#computer-use) |
+
+**File browsing on Linux:** The [`fix_browse_files_linux.nim`](patches/fix_browse_files_linux.nim) patch enables full directory navigation in the file-picker dialog (upstream limits it to macOS). Drag-and-drop of PDF files works natively via Electron's file-drop handling.
+
+**Supported formats:** PDF, plain text, Markdown, CSV, DOCX (via Cowork `/docx`), PPTX (via Cowork `/pptx`), and images (PNG/JPEG/GIF/WEBP) are all accepted as attachments in the Chat input. Claude reads the content directly — no viewer or converter is needed.
+
 ## Claude Code Integration
 
 This package patches Claude Desktop to work with system-installed Claude Code on Linux.
